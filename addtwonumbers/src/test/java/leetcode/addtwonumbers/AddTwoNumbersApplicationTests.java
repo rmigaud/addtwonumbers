@@ -172,6 +172,7 @@ class AddTwoNumbersApplicationTests {
         ListNode listNodeHead3 = new ListNode(1);
         assertEquals(listNodeHead3.val, addTwoNumbers(listNodeHead1, listNodeHead2).val);
     }
+
     @Test
     void exampleSix() {
         ListNode listNodeHead1 = new ListNode(2);
@@ -185,7 +186,7 @@ class AddTwoNumbersApplicationTests {
     void exampleSeven() {
         //[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
 
-        ListNode lnh1 = populateListNode(new int[]{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1});
+        ListNode lnh1 = populateListNode(new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1});
         ListNode listNodeHead1 = new ListNode(1);
         listNodeHead1.next = new ListNode(0);
         listNodeHead1.next.next = new ListNode(0);
@@ -204,8 +205,7 @@ class AddTwoNumbersApplicationTests {
         listNodeHead1.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next = new ListNode(0);
         listNodeHead1.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next = new ListNode(0);
 
-        // [5,6,4]
-        ListNode lnh2 = populateListNode(new int[]{5,6,4});
+        ListNode lnh2 = populateListNode(new int[]{5, 6, 4});
         ListNode listNodeHead2 = new ListNode(1);
         listNodeHead2.next = new ListNode(9);
         listNodeHead2.next.next = new ListNode(9);
@@ -217,8 +217,7 @@ class AddTwoNumbersApplicationTests {
         listNodeHead2.next.next.next.next.next.next.next.next = new ListNode(9);
         listNodeHead2.next.next.next.next.next.next.next.next.next = new ListNode(9);
 
-        // [6,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
-        ListNode lnh3 = populateListNode(new int[]{6,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1});
+        ListNode lnh3 = populateListNode(new int[]{6, 6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1});
         ListNode listNodeHead3 = new ListNode(0);
         listNodeHead3.next = new ListNode(0);
         listNodeHead3.next.next = new ListNode(0);
@@ -271,10 +270,9 @@ class AddTwoNumbersApplicationTests {
             return new ListNode(ints[1], new ListNode(ints[0]));
         } else {
             ArrayList<Integer> list = new ArrayList<>();
-            for (int i = 0; i < ints.length; i++) {
-                list.add(ints[i]);
+            for (int anInt : ints) {
+                list.add(anInt);
             }
-//            Collections.reverse(list);
             ListNode headNode = new ListNode(list.get(0));
             ListNode myList = headNode;
 
@@ -290,22 +288,23 @@ class AddTwoNumbersApplicationTests {
     }
 
     private ListNode sumArrays(int[] ln1Values, int[] ln2Values) {
-        System.out.printf("%s + %s = ", Arrays.toString(ln1Values), Arrays.toString(ln2Values));
+        System.out.printf("%s + %s = %n", Arrays.toString(ln1Values), Arrays.toString(ln2Values));
         BigInteger bisum1 = BigInteger.valueOf(0);
         for (int i = 0; i < ln1Values.length; i++) {
-            long intSum = (long) (ln1Values[i] * Math.pow(10, ln1Values.length - i - 1));
-            BigInteger bigintSum = BigInteger.valueOf((long) (ln1Values[i] * Math.pow(10, ln1Values.length - i - 1)));
-            bisum1 = bisum1.add(BigInteger.valueOf(intSum));
+            BigInteger bigintSum = BigInteger.valueOf( (ln1Values[i]) ).multiply(BigInteger.valueOf(10).pow(ln1Values.length - i - 1));
+            System.out.println("bigintSum:" + bigintSum);
+            bisum1 = bisum1.add(bigintSum);
         }
         BigInteger bisum2 = BigInteger.valueOf(0);
         for (int j = 0; j < ln2Values.length; j++) {
-            long intSum = (long) (ln2Values[j] * Math.pow(10, ln2Values.length - j - 1));
-            bisum2 = bisum2.add(BigInteger.valueOf(intSum));
+            BigInteger bigintSum = BigInteger.valueOf( (ln2Values[j]) ).multiply(BigInteger.valueOf(10).pow(ln2Values.length - j - 1));
+            System.out.println("bigintSum:" + bigintSum);
+            bisum2 = bisum2.add(bigintSum);
         }
 
         BigInteger biTotal = (bisum1).add(bisum2);
+        System.out.println("biTotal:" + biTotal);
         String strTotal = biTotal + "";
-//        System.out.println("strTotals:" + strTotal);
         System.out.println(biTotal);
         String[] strArr = strTotal.split("");
         List<String> list = Arrays.asList(strArr);
