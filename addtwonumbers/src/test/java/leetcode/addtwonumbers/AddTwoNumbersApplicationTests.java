@@ -3,9 +3,8 @@ package leetcode.addtwonumbers;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.lang.reflect.Array;
+import java.math.BigInteger;
 import java.util.*;
-import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,6 +23,7 @@ class AddTwoNumbersApplicationTests {
         int[] expectedArray = new int[]{9, 9};
         assertArrayEquals(expectedArray, populateArray(myNode));
     }
+
     @Test
     void populateArraysTest3() {
         ListNode myNode = new ListNode(8);
@@ -31,6 +31,7 @@ class AddTwoNumbersApplicationTests {
         int[] expectedArray = new int[]{9, 8};
         assertArrayEquals(expectedArray, populateArray(myNode));
     }
+
     @Test
     void populateArraysTest4() {
         ListNode myNode = new ListNode(3);
@@ -45,11 +46,202 @@ class AddTwoNumbersApplicationTests {
         assertEquals(1, populateListNode(new int[]{0, 1}).val);
         assertEquals(0, populateListNode(new int[]{0, 1}).next.val);
     }
+
     @Test
     void populateListNodeTest2() {
-        assertEquals(2, populateListNode(new int[]{0, 1, 2}).val);
+        assertEquals(0, populateListNode(new int[]{0, 1, 2}).val);
         assertEquals(1, populateListNode(new int[]{0, 1, 2}).next.val);
-        assertEquals(0, populateListNode(new int[]{0, 1, 2}).next.next.val);
+        assertEquals(2, populateListNode(new int[]{0, 1, 2}).next.next.val);
+    }
+
+    @Test
+    void populateListNodeTest3() {
+        assertEquals(0, populateListNode(new int[]{0, 1, 2, 3}).val);
+        assertEquals(1, populateListNode(new int[]{0, 1, 2, 3}).next.val);
+        assertEquals(2, populateListNode(new int[]{0, 1, 2, 3}).next.next.val);
+        assertEquals(3, populateListNode(new int[]{0, 1, 2, 3}).next.next.next.val);
+    }
+
+    @Test
+    void exampleOne() {
+        ListNode listNodeHead1 = new ListNode(2);
+        listNodeHead1.next = new ListNode(4);
+        listNodeHead1.next.next = new ListNode(3);
+
+        ListNode listNodeHead2 = new ListNode(5);
+        listNodeHead2.next = new ListNode(6);
+        listNodeHead2.next.next = new ListNode(4);
+
+        ListNode listNodeHead3 = new ListNode(7);
+        listNodeHead3.next = new ListNode(0);
+        listNodeHead3.next.next = new ListNode(8);
+
+        assertEquals(listNodeHead3.val, addTwoNumbers(listNodeHead1, listNodeHead2).val);
+        assertEquals(listNodeHead3.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.val);
+        assertEquals(listNodeHead3.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.val);
+    }
+
+    @Test
+    void exampleTwo() {
+        ListNode listNodeHead1 = new ListNode(0);
+        ListNode listNodeHead2 = new ListNode(0);
+        ListNode listNodeHead3 = new ListNode(0);
+        assertEquals(listNodeHead3.val, addTwoNumbers(listNodeHead1, listNodeHead2).val);
+    }
+
+
+    @Test
+    void examplethree() {
+        ListNode listNodeHead1 = new ListNode(9);
+        listNodeHead1.next = new ListNode(9);
+        listNodeHead1.next.next = new ListNode(9);
+        listNodeHead1.next.next.next = new ListNode(9);
+        listNodeHead1.next.next.next.next = new ListNode(9);
+        listNodeHead1.next.next.next.next.next = new ListNode(9);
+        listNodeHead1.next.next.next.next.next.next = new ListNode(9);
+
+        ListNode listNodeHead2 = new ListNode(9);
+        listNodeHead2.next = new ListNode(9);
+        listNodeHead2.next.next = new ListNode(9);
+        listNodeHead2.next.next.next = new ListNode(9);
+
+        ListNode listNodeHead3 = new ListNode(8);
+        listNodeHead3.next = new ListNode(9);
+        listNodeHead3.next.next = new ListNode(9);
+        listNodeHead3.next.next.next = new ListNode(9);
+        listNodeHead3.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next.next = new ListNode(1);
+
+        assertEquals(listNodeHead3.val, addTwoNumbers(listNodeHead1, listNodeHead2).val);
+        assertEquals(listNodeHead3.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.val);
+        assertEquals(listNodeHead3.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.val);
+        assertEquals(listNodeHead3.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.next.next.next.val);
+    }
+
+
+    @Test
+    void exampleFour() {
+        ListNode listNodeHead1 = new ListNode(9);
+
+        ListNode listNodeHead2 = new ListNode(1);
+        listNodeHead2.next = new ListNode(9);
+        listNodeHead2.next.next = new ListNode(9);
+        listNodeHead2.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next.next.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next.next.next.next.next.next = new ListNode(9);
+
+        ListNode listNodeHead3 = new ListNode(0);
+        listNodeHead3.next = new ListNode(0);
+        listNodeHead3.next.next = new ListNode(0);
+        listNodeHead3.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next.next.next.next.next = new ListNode(1);
+
+        assertEquals(listNodeHead3.val, addTwoNumbers(listNodeHead1, listNodeHead2).val);
+        assertEquals(listNodeHead3.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.val);
+        assertEquals(listNodeHead3.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.val);
+        assertEquals(listNodeHead3.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.next.next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.next.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.next.next.next.next.next.val);
+        assertEquals(listNodeHead3.next.next.next.next.next.next.next.next.next.next.val, addTwoNumbers(listNodeHead1, listNodeHead2).next.next.next.next.next.next.next.next.next.next.val);
+    }
+
+    @Test
+    void exampleFive() {
+        ListNode listNodeHead1 = new ListNode(0);
+        ListNode listNodeHead2 = new ListNode(1);
+        ListNode listNodeHead3 = new ListNode(1);
+        assertEquals(listNodeHead3.val, addTwoNumbers(listNodeHead1, listNodeHead2).val);
+    }
+    @Test
+    void exampleSix() {
+        ListNode listNodeHead1 = new ListNode(2);
+        ListNode listNodeHead2 = new ListNode(0);
+        ListNode listNodeHead3 = new ListNode(2);
+        assertEquals(listNodeHead3.val, addTwoNumbers(listNodeHead1, listNodeHead2).val);
+    }
+
+
+    @Test
+    void exampleSeven() {
+        //[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+
+        ListNode lnh1 = populateListNode(new int[]{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1});
+        ListNode listNodeHead1 = new ListNode(1);
+        listNodeHead1.next = new ListNode(0);
+        listNodeHead1.next.next = new ListNode(0);
+        listNodeHead1.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead1.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next = new ListNode(0);
+
+        // [5,6,4]
+        ListNode lnh2 = populateListNode(new int[]{5,6,4});
+        ListNode listNodeHead2 = new ListNode(1);
+        listNodeHead2.next = new ListNode(9);
+        listNodeHead2.next.next = new ListNode(9);
+        listNodeHead2.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next.next.next.next.next = new ListNode(9);
+        listNodeHead2.next.next.next.next.next.next.next.next.next = new ListNode(9);
+
+        // [6,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+        ListNode lnh3 = populateListNode(new int[]{6,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1});
+        ListNode listNodeHead3 = new ListNode(0);
+        listNodeHead3.next = new ListNode(0);
+        listNodeHead3.next.next = new ListNode(0);
+        listNodeHead3.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next.next.next.next = new ListNode(0);
+        listNodeHead3.next.next.next.next.next.next.next.next.next.next = new ListNode(1);
+
+        assertEquals(lnh3.val, addTwoNumbers(lnh1, lnh2).val);
+        assertEquals(lnh3.next.val, addTwoNumbers(lnh1, lnh2).next.val);
+        assertEquals(lnh3.next.next.val, addTwoNumbers(lnh1, lnh2).next.next.val);
+        assertEquals(lnh3.next.next.next.val, addTwoNumbers(lnh1, lnh2).next.next.next.val);
+        assertEquals(lnh3.next.next.next.next.val, addTwoNumbers(lnh1, lnh2).next.next.next.next.val);
+        assertEquals(lnh3.next.next.next.next.next.val, addTwoNumbers(lnh1, lnh2).next.next.next.next.next.val);
+        assertEquals(lnh3.next.next.next.next.next.next.val, addTwoNumbers(lnh1, lnh2).next.next.next.next.next.next.val);
+        assertEquals(lnh3.next.next.next.next.next.next.next.val, addTwoNumbers(lnh1, lnh2).next.next.next.next.next.next.next.val);
+        assertEquals(lnh3.next.next.next.next.next.next.next.next.val, addTwoNumbers(lnh1, lnh2).next.next.next.next.next.next.next.next.val);
+        assertEquals(lnh3.next.next.next.next.next.next.next.next.next.val, addTwoNumbers(lnh1, lnh2).next.next.next.next.next.next.next.next.next.val);
+        assertEquals(lnh3.next.next.next.next.next.next.next.next.next.next.val, addTwoNumbers(lnh1, lnh2).next.next.next.next.next.next.next.next.next.next.val);
     }
 
     /**
@@ -64,8 +256,7 @@ class AddTwoNumbersApplicationTests {
     public ListNode addTwoNumbers(ListNode ln1, ListNode ln2) {
         int[] ln1Values = populateArray(ln1);
         int[] ln2Values = populateArray(ln2);
-        int[] ln3Values = sumArrays(ln1Values, ln2Values);
-        return populateListNode(ln3Values);
+        return (sumArrays(ln1Values, ln2Values));
     }
 
     /**
@@ -75,30 +266,66 @@ class AddTwoNumbersApplicationTests {
      * @return ListNode,
      */
     private ListNode populateListNode(int[] ints) {
-//        if (ints.length == 0) return new ListNode();
         if (ints.length == 1) return new ListNode(ints[0]);
         if (ints.length == 2) {
             return new ListNode(ints[1], new ListNode(ints[0]));
         } else {
             ArrayList<Integer> list = new ArrayList<>();
-            for(int i =0; i<ints.length; i++){
+            for (int i = 0; i < ints.length; i++) {
                 list.add(ints[i]);
             }
-            System.out.println(list);
-            Collections.reverse(list);
-            System.out.println(list);
-            ListNode head = new ListNode(list.get(0));
-            ListNode returnedListNode = head;
-            for(int i =0; i< list.size(); i++){
-                head.next = new ListNode(list.get(i));
-                returnedListNode = returnedListNode.next;
+//            Collections.reverse(list);
+            ListNode headNode = new ListNode(list.get(0));
+            ListNode myList = headNode;
+
+            if (list.size() > 1) {
+                for (int i = 1; i < list.size(); i++) {
+                    ListNode nextNode = new ListNode(list.get(i));
+                    headNode.next = nextNode;
+                    headNode = headNode.next;
+                }
             }
-            return returnedListNode;
+            return myList;
         }
     }
 
-    private int[] sumArrays(int[] ln1Values, int[] ln2Values) {
-        return new int[]{0, 1};
+    private ListNode sumArrays(int[] ln1Values, int[] ln2Values) {
+        System.out.printf("%s + %s = ", Arrays.toString(ln1Values), Arrays.toString(ln2Values));
+        BigInteger bisum1 = BigInteger.valueOf(0);
+        for (int i = 0; i < ln1Values.length; i++) {
+            long intSum = (long) (ln1Values[i] * Math.pow(10, ln1Values.length - i - 1));
+            BigInteger bigintSum = BigInteger.valueOf((long) (ln1Values[i] * Math.pow(10, ln1Values.length - i - 1)));
+            bisum1 = bisum1.add(BigInteger.valueOf(intSum));
+        }
+        BigInteger bisum2 = BigInteger.valueOf(0);
+        for (int j = 0; j < ln2Values.length; j++) {
+            long intSum = (long) (ln2Values[j] * Math.pow(10, ln2Values.length - j - 1));
+            bisum2 = bisum2.add(BigInteger.valueOf(intSum));
+        }
+
+        BigInteger biTotal = (bisum1).add(bisum2);
+        String strTotal = biTotal + "";
+//        System.out.println("strTotals:" + strTotal);
+        System.out.println(biTotal);
+        String[] strArr = strTotal.split("");
+        List<String> list = Arrays.asList(strArr);
+
+        Collections.reverse(list);
+        String[] reversedArray = list.toArray(strArr);
+        System.out.println("(reversed)" + Arrays.toString(reversedArray));
+
+        ListNode head = new ListNode(Integer.parseInt(reversedArray[0]));
+        ListNode myList = head;
+        for (int i = 1; i < reversedArray.length; i++) {
+            try {
+                head.next = new ListNode(Integer.parseInt(reversedArray[i]));
+                head = head.next;
+            } catch (NumberFormatException e) {
+                head.next = new ListNode(0);
+                head = head.next;
+            }
+        }
+        return myList;
     }
 
     /**
@@ -111,12 +338,18 @@ class AddTwoNumbersApplicationTests {
     public static int[] populateArray(ListNode ln1) {
         ArrayList<Integer> ints = new ArrayList<>();
         ints.add(ln1.val);
-        while(ln1.next!= null){
+        while (ln1.next != null) {
             ints.add(ln1.next.val);
             ln1 = ln1.next;
         }
         Collections.reverse(ints);
-
-        return ints.stream().filter(Objects::nonNull).mapToInt(i->i).toArray();
+        int[] returnArray = new int[ints.size()];
+        int indx = 0;
+        for (Integer i : ints) {
+            returnArray[indx] = i;
+            indx++;
+        }
+        return returnArray;
     }
+
 }
